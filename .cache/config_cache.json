@@ -1,0 +1,291 @@
+{
+  "booking": {
+    "price_regex": "([\\d\\s,.]+)",
+    "bed_selectors": [
+      ".ddaf087582",
+      "[data-testid=\"bed-info\"]",
+      ".rt-bed-types"
+    ],
+    "occupancy_rules": {
+      "row_selector": "table.hprt-table tbody tr",
+      "icon_selector": "i.bicon-occupancy, span.bicon-occupancy",
+      "aria_attribute": "aria-label",
+      "occupancy_cell_selector": "td.hprt-table-cell-occupancy"
+    },
+    "price_selectors": [
+      ".bui-price-display__value span.prco-valign-middle-helper",
+      "span.bui-u-sr-only",
+      "[data-testid=\"price-and-discounted-final-price\"]",
+      "[data-testid=\"recommended-unit-price\"]"
+    ],
+    "title_selectors": [
+      "[data-testid=\"title\"]",
+      "#hp_hotel_name",
+      "h2.pp-header__title"
+    ],
+    "currency_default": "EUR",
+    "default_timeout_ms": 30000,
+    "meal_plan_selector": ".hprt-table-cell-conditions, .bui-list__item",
+    "room_name_selector": ".hprt-roomtype-icon-link, [data-testid=\"room-name\"], .hprt-roomtype-link",
+    "row_price_selector": ".bui-price-display__value, [data-testid=\"price-and-discounted-final-price\"], .prco-valign-middle-helper",
+    "sold_out_selectors": [
+      ".fe_banner__message",
+      ".bui-alert--error",
+      "[data-testid=\"sold-out-property-banner\"]"
+    ],
+    "table_row_selector": "table.hprt-table tbody tr",
+    "room_name_selectors": [
+      ".b08850ce41",
+      ".hprt-roomtype-icon-link",
+      ".hprt-roomtype-link",
+      "[data-testid=\"room-name\"]",
+      ".room_link span"
+    ],
+    "cancellation_selector": ".hprt-table-cell-conditions",
+    "occupancy_cell_selector": "td.hprt-table-cell-occupancy",
+    "occupancy_icon_selector": "i.bicon-occupancy, span.bicon-occupancy, svg",
+    "cookie_consent_selectors": [
+      "#onetrust-accept-btn-handler",
+      "button#onetrust-accept-btn-handler",
+      "button[id*=\"cookie\"][id*=\"accept\"]",
+      "button[class*=\"cookie\"][class*=\"accept\"]",
+      "button:has-text(\"Prijať všetky\")",
+      "button:has-text(\"Súhlasím\")",
+      "button:has-text(\"Accept all\")",
+      "button:has-text(\"Accept\")"
+    ],
+    "occupancy_icon_selectors": [
+      "i.bicon-occupancy, i.bicon-occupancychild, span.bicon-occupancy, span.bicon-occupancychild",
+      ".bicon-occupancy, .bicon-occupancychild"
+    ]
+  },
+  "hoteladmin": {
+    "timeout_ms": 25000,
+    "price_regex": "([\\d\\s,.]+)",
+    "price_selectors": [
+      ".package-item .price",
+      ".room-item .price",
+      ".price-value",
+      "span.price",
+      ".price strong"
+    ],
+    "currency_default": "EUR",
+    "wait_after_submit": ".room-item, .package-item, .price, .reservation-results",
+    "wait_for_selector": "iframe, .price, .room, .reservation-form",
+    "sold_out_selectors": [
+      ".no-rooms-available",
+      ".alert-sold-out",
+      ".not-available"
+    ],
+    "search_form_selector": "form.container, form[action*=\"rezerv\"], .reservation-form",
+    "intercept_url_pattern": "/search/",
+    "response_content_type": "text/html",
+    "submit_button_selectors": [
+      "form.container button[type=\"submit\"]",
+      "form.container button:has-text(\"Overiť\")",
+      "form.container button:has-text(\"Hľadať\")",
+      "form.container input[type=\"submit\"]",
+      "button:has-text(\"Vyhľadať\")",
+      "button:has-text(\"Overiť dostupnosť\")"
+    ],
+    "cookie_consent_selectors": [
+      "#onetrust-accept-btn-handler",
+      "button[id*=\"cookie\"][id*=\"accept\"]",
+      "button:has-text(\"Prijať všetky\")",
+      "button:has-text(\"Prijať\")",
+      "button:has-text(\"Súhlasím\")",
+      "button:has-text(\"Rozumiem\")",
+      ".cookie-bar button",
+      "a.cc-btn.cc-dismiss",
+      "#c-p-bn"
+    ]
+  },
+  "profitroom": {
+    "sold_out_selectors": [
+      ".profitroom-soldout",
+      ".no-availability-message"
+    ],
+    "price_selectors": [
+      ".profitroom-price__value",
+      ".price--highlight",
+      ".total-price"
+    ],
+    "price_regex": "([\\d\\s.,]+)",
+    "date_format": "%Y-%m-%d",
+    "url_template": "{base_url}?checkIn={check_in}&checkOut={check_out}&adults={adults}&children={children}"
+  },
+  "permon_direct": {
+    "method": "token_api_post",
+    "date_format": "%Y-%m-%d",
+    "price_regex": "(\\d+[.,]\\d{2})",
+    "form_payload": {
+      "date_to": "{check_out}",
+      "date_from": "{check_in}",
+      "rooms_count": "1",
+      "your_nick_hp": "",
+      "adults_count[1]": "{adults}",
+      "childrens[1][1]": "{child_age_1}",
+      "childrens_count[1]": "{children}"
+    },
+    "token_endpoint": "https://booking.hotelpermon.sk/sk/home/createSearchToken",
+    "bonus_selectors": [
+      "div[data-offer-wrapper]"
+    ],
+    "price_selectors": [
+      ".text-18.lh-15.fw-600",
+      ":text-matches(\"od\\\\s+\\\\d+\", \"i\")"
+    ],
+    "wait_for_selector": "text=Vašim požiadavkám vyhovujú tieto izby",
+    "sold_out_selectors": [
+      ":has-text(\"Žiadne voľné kapacity\")",
+      ":has-text(\"Vypredané\")",
+      ":has-text(\"Nenašli sa žiadne izby\")"
+    ],
+    "room_card_selectors": [
+      "div[data-search-wrappers]"
+    ],
+    "room_name_attribute": "data-room_name",
+    "room_name_selectors": [
+      "h3.fw-600"
+    ],
+    "search_url_template": "https://booking.hotelpermon.sk/sk/search/{token}",
+    "catalog_room_selectors": [
+      "h2.post_title a",
+      ".w-post-elm.post_title a",
+      "h2.post_title"
+    ],
+    "cookie_consent_selectors": [
+      "#onetrust-accept-btn-handler",
+      "button[id*=\"cookie\"][id*=\"accept\"]",
+      "button:has-text(\"Prijať všetky\")",
+      "button:has-text(\"Súhlasím\")",
+      ".cookie-bar button"
+    ]
+  },
+  "room_matching": {
+    "capacity_rules": {
+      "1_pax": {
+        "direct_keywords": [
+          "1-lozkov",
+          "1 lozkov",
+          "jednolozkov",
+          "single"
+        ],
+        "booking_beds_any": [
+          "jednolozkova postel",
+          "1 jednolozkov"
+        ],
+        "booking_keywords": [
+          "1-lozkov",
+          "jednolozkov",
+          "single"
+        ]
+      },
+      "2_pax": {
+        "direct_keywords": [
+          "2-lozkov",
+          "2 lozkov",
+          "dvojlozkov",
+          "double"
+        ],
+        "booking_beds_any": [
+          "manzelska postel",
+          "oddelenymi lozkami"
+        ],
+        "booking_keywords": [
+          "2-lozkov",
+          "dvojlozkov",
+          "double"
+        ]
+      },
+      "suite": {
+        "direct_keywords": [
+          "suite",
+          "suita",
+          "apartman",
+          "penthouse",
+          "president",
+          "prezidentsk"
+        ],
+        "booking_keywords": [
+          "suite",
+          "suita",
+          "apartman",
+          "penthouse",
+          "president",
+          "prezidentsk"
+        ]
+      },
+      "family": {
+        "direct_keywords": [
+          "family",
+          "rodinn"
+        ],
+        "booking_keywords": [
+          "family",
+          "rodinn"
+        ]
+      },
+      "2_plus_1": {
+        "direct_keywords": [
+          "pristel",
+          "plus"
+        ],
+        "booking_beds_any": [
+          "pohovk",
+          "sofa",
+          "pristel"
+        ],
+        "booking_keywords": [
+          "pristel",
+          "plus"
+        ]
+      }
+    },
+    "min_fuzzy_score": 55,
+    "capacity_priority_order": [
+      "family",
+      "suite",
+      "2_plus_1",
+      "1_pax",
+      "2_pax"
+    ],
+    "exclusive_direct_groups": [
+      "family"
+    ]
+  },
+  "hrebienok": {
+    "timeout_ms": 25000,
+    "date_format": "%d.%m.%Y",
+    "price_regex": "(\\d+[\\s.,]*\\d*)",
+    "url_template": "https://hrebienok-resort.sk/booking/?checkin={check_in}&checkout={check_out}&rooms=1&1-adults={adults}&children={children}",
+    "bonus_selectors": [
+      ".onerate h3",
+      ".onerate .allfees"
+    ],
+    "price_selectors": [
+      ".onerate .final_price",
+      ".final_price"
+    ],
+    "currency_default": "EUR",
+    "wait_for_selector": "div.oneroomr",
+    "sold_out_selectors": [
+      ":has-text(\"Žiadne voľné izby\")",
+      ":has-text(\"Nie sú dostupné žiadne\")",
+      ".no-availability"
+    ],
+    "room_card_selectors": [
+      "div.oneroomr"
+    ],
+    "room_name_selectors": [
+      "h2"
+    ],
+    "offer_item_selectors": [
+      ".onerate"
+    ],
+    "catalog_room_selectors": [
+      "div.offer-info > h3",
+      ".offer-info h3"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "8235402c-05a2-4b18-b691-f25a18c7ad73",
+    "name": "Grand Hotel Permon",
+    "booking_url": "https://www.booking.com/hotel/sk/grand-permon.sk.html",
+    "direct_url": "https://booking.hotelpermon.sk",
+    "direct_booking_engine": "permon_direct",
+    "is_active": true,
+    "matching_rules": {},
+    "rooms_catalog_url": "https://permonresort.sk/grand-hotel-permon/ubytovanie/",
+    "booking_rooms_url": "https://www.booking.com/hotel/sk/grand-permon-pribylina-podbanske.sk.html?aid=304142&label=mkt123sc-4a65b3a3-6aa0-430e-880c-3707b8be3cbb&sid=ab611030026a90b2df1e6fc14bf519f6&dest_id=12546451&dest_type=hotel&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1794918050&srpvid=175b707e1036432fc94bce30e4850bdf&type=total&ucfs=1&"
+  },
+  {
+    "id": "4c66f058-632a-4c23-b945-1bc71338df97",
+    "name": "Hrebienok",
+    "booking_url": "https://www.booking.com/hotel/sk/hrebienok-resort-vysoke-tatry.sk.html",
+    "direct_url": "https://hrebienok-resort.sk/",
+    "direct_booking_engine": "hrebienok",
+    "is_active": true,
+    "matching_rules": {},
+    "rooms_catalog_url": "https://hrebienok-resort.sk/apartmany/",
+    "booking_rooms_url": null
+  }
+]
