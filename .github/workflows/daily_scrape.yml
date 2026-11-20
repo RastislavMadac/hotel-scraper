@@ -13,21 +13,25 @@ on:
     # Zajtra 20.11. o 06:00 CET = 05:00 UTC
     - cron: '0 5 20 11 *'
 
-  # Stále zostáva aj možnosť spustiť ručne jedným kliknutím
+  # Ručné spustenie jedným kliknutím v záložke Actions
   workflow_dispatch:
     inputs:
       check_in:
         description: 'Dátum príchodu (YYYY-MM-DD)'
         required: true
-        default: '2027-02-13'
+        default: '2027-02-15'
       check_out:
         description: 'Dátum odchodu (YYYY-MM-DD)'
         required: true
-        default: '2027-02-15'
+        default: '2027-02-17'
       guests:
         description: 'Počet dospelých'
         required: true
         default: '2'
+      hotels:
+        description: 'Filter hotela (voliteľné, napr. Grand Hotel Bellevue)'
+        required: false
+        default: ''
 
 jobs:
   scrape:
@@ -50,17 +54,23 @@ jobs:
           pip install -r requirements.txt
           playwright install --with-deps chromium
 
-      - name: Výber náhodného februárového dátumu pre danú hodinu a spustenie
+      - name: Príprava priečinkov pre reporty, logy a screenshoty
+        run: mkdir -p reports logs screenshots
+
+      - name: Spustenie zberu cien
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
+          HOTEL_FLAG=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             CHECK_IN="${{ github.event.inputs.check_in }}"
             CHECK_OUT="${{ github.event.inputs.check_out }}"
             GUESTS="${{ github.event.inputs.guests }}"
+            if [ -n "${{ github.event.inputs.hotels }}" ]; then
+              HOTEL_FLAG="--hotels \"${{ github.event.inputs.hotels }}\""
+            fi
           else
-            # Aktuálna hodina v UTC podľa plánovača
             UTC_HOUR=$(date -u +%H)
             case "$UTC_HOUR" in
               21) START_DAY=$((1 + RANDOM % 6)) ;;   # 22:00 CET -> 1. až 6. feb
@@ -71,7 +81,6 @@ jobs:
               *)  START_DAY=$((1 + RANDOM % 25)) ;;
             esac
 
-            # Dĺžka pobytu 2 noci (aby ostalo vo februári 2027)
             END_DAY=$((START_DAY + 2))
             CHECK_IN=$(printf "2027-02-%02d" "$START_DAY")
             CHECK_OUT=$(printf "2027-02-%02d" "$END_DAY")
@@ -81,12 +90,15 @@ jobs:
           echo "=========================================="
           echo "Spúšťam testovací beh pre termín: $CHECK_IN -> $CHECK_OUT (hostia: $GUESTS)"
           echo "=========================================="
-          python main.py --check-in "$CHECK_IN" --check-out "$CHECK_OUT" --guests "$GUESTS"
+          eval python main.py --check-in "$CHECK_IN" --check-out "$CHECK_OUT" --guests "$GUESTS" $HOTEL_FLAG
 
-      - name: Uloženie Excel reportu na stiahnutie
+      - name: Uloženie Excel reportu, logov a screenshotov na stiahnutie
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: hotel-prices-feb2027-${{ github.run_number }}
-          path: reports/*.xlsx
+          path: |
+            reports/*.xlsx
+            logs/**
+            screenshots/**
           if-no-files-found: ignore
